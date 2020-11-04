@@ -1,16 +1,16 @@
 <?php
 
-namespace Spatie\Valuestore\Test;
+namespace BlueSaltLabs\Valuestore\Test;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Valuestore\Valuestore;
+use BlueSaltLabs\Valuestore\Valuestore;
 
 class ValuestoreTest extends TestCase
 {
     /** @var string */
     protected $storageFile;
 
-    /** @var \Spatie\Valuestore\Valuestore */
+    /** @var \BlueSaltLabs\Valuestore\Valuestore */
     protected $valuestore;
 
     public function setUp(): void

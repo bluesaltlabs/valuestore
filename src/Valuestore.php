@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Valuestore;
+namespace BlueSaltLabs\Valuestore;
 
 use ArrayAccess;
 use Countable;

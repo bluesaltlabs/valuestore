@@ -1,14 +1,21 @@
 {
-    "name": "spatie/valuestore",
+    "name": "bluesaltlabs/valuestore",
     "description": "Easily store some values",
     "keywords": [
         "spatie",
+        "bluesaltlabs",
         "valuestore",
         "json"
     ],
-    "homepage": "https://github.com/spatie/valuestore",
+    "homepage": "https://github.com/bluesaltlabs/valuestore",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Luke Sontrop",
+            "email": "luke@bluesaltlabs.com",
+            "homepage": "https://bluesaltlabs.com",
+            "role": "Developer"
+        },
         {
             "name": "Freek Van der Herten",
             "email": "freek@spatie.be",
@@ -30,12 +37,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Valuestore\\": "src"
+            "BlueSaltLabs\\Valuestore\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Valuestore\\Test\\": "tests"
+            "BlueSaltLabs\\Valuestore\\Test\\": "tests"
         }
     },
     "scripts": {
