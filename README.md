@@ -1,5 +1,18 @@
 # Easily store some loose values
 
+## BlueSalt Labs Edit:
+
+**Note:** I needed this package to use Laravel's storage facade, which for some reason Spatie didn't include this functionality (seems like a no-brainer to me but, whatever). 
+
+I have no idea how pull requests work, so until I figure out how to request this feature be merged in, here the project will sit.
+If Spatie or anyone else finds this and would be kind enough to help, that would be wonderful.
+
+I apologize for doing this in such a strange way. I do not intend to take credit for something I didn't do. I simply don't have time to figure this out right now. 
+
+
+---
+## Original Readme:
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/valuestore.svg?style=flat-square)](https://packagist.org/packages/spatie/valuestore)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 ![Tests](https://github.com/spatie/valuestore/workflows/Tests/badge.svg)
