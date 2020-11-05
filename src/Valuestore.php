@@ -2,6 +2,7 @@
 
 namespace BlueSaltLabs\Valuestore;
 
+use Illuminate\Support\Facades\Storage;
 use ArrayAccess;
 use Countable;
 
@@ -172,11 +173,15 @@ class Valuestore implements ArrayAccess, Countable
      */
     public function all() : array
     {
-        if (! file_exists($this->fileName)) {
+        $disk = config('valuestore.disk_name');
+        $path = rtrim(config('valuestore.base_path'), '/').'/';
+
+        if (! Storage::disk($disk)->exists($path.$this->fileName)) {
             return [];
         }
 
-        return json_decode(file_get_contents($this->fileName), true) ?? [];
+        $fileContent = Storage::disk($disk)->get($path.$this->fileName);
+        return json_decode($fileContent, true) ?? [];
     }
 
     /**
@@ -382,10 +387,13 @@ class Valuestore implements ArrayAccess, Countable
      */
     protected function setContent(array $values)
     {
-        file_put_contents($this->fileName, json_encode($values));
+        $disk = config('valuestore.disk_name');
+        $path = rtrim(config('valuestore.base_path'), '/').'/';
 
         if (! count($values)) {
-            unlink($this->fileName);
+            Storage::disk($disk)->delete($path.$this->fileName);
+        } else {
+            Storage::disk($disk)->put($path.$this->fileName, json_encode($values));
         }
 
         return $this;

@@ -74,6 +74,11 @@ You can install the package via composer:
 composer require spatie/valuestore
 ```
 
+todo: explain installing config file:
+``` bash
+php artisan vendor:publish --provider="BlueSaltLabs\Valuestore\ValuestoreServiceProvider" --tag="config"
+```
+
 ## Usage
 
 To create a Valuestore use the `make` method.
