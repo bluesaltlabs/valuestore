@@ -173,15 +173,15 @@ class Valuestore implements ArrayAccess, Countable
      */
     public function all() : array
     {
-        $disk = config('valuestore.disk_name');
-        $path = rtrim(config('valuestore.base_path'), '/').'/';
+        $storageInstance = $this->getStorageInstance();
+        $filePath = $this->getPath();
 
-        if (! Storage::disk($disk)->exists($path.$this->fileName)) {
+        try {
+            $fileContent = $storageInstance->get($filePath);
+            return json_decode($fileContent, true) ?? [];
+        } catch (\Throwable $t) {
             return [];
         }
-
-        $fileContent = Storage::disk($disk)->get($path.$this->fileName);
-        return json_decode($fileContent, true) ?? [];
     }
 
     /**
@@ -387,15 +387,33 @@ class Valuestore implements ArrayAccess, Countable
      */
     protected function setContent(array $values)
     {
-        $disk = config('valuestore.disk_name');
-        $path = rtrim(config('valuestore.base_path'), '/').'/';
+        $keepEmpty = config('valuestore.keep_empty_files');
 
-        if (! count($values)) {
-            Storage::disk($disk)->delete($path.$this->fileName);
+        if (! count($values) && ! $keepEmpty) {
+            $this->getStorageInstance()->delete( $this->getPath() );
         } else {
-            Storage::disk($disk)->put($path.$this->fileName, json_encode($values));
+            $this->getStorageInstance()->put($this->getPath(), json_encode($values));
         }
 
         return $this;
     }
+
+    /**
+     * @return \Illuminate\Contracts\Filesystem\Filesystem
+     */
+    protected function getStorageInstance() {
+        $disk = config('valuestore.disk_name');
+        return Storage::disk($disk);
+    }
+
+    /**
+     * @param bool $withFilename
+     * @return string
+     */
+    protected function getPath($withFilename = true) {
+        $path = rtrim(config('valuestore.base_path'), '/').'/';
+
+        return ($withFilename ? $path.$this->fileName : $path);
+    }
+
 }
