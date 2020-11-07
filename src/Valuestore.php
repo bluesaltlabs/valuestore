@@ -412,6 +412,13 @@ class Valuestore implements ArrayAccess, Countable
      */
     protected function getPath($withFilename = true) {
         $path = rtrim(config('valuestore.base_path'), '/').'/';
+        $storeByEnv = config('valuestore.store_by_env');
+
+        if($storeByEnv) {
+            $env = config('app.env');
+            if($env && $env !== 'production') { $path .= $env.'/'; }
+
+        }
 
         return ($withFilename ? $path.$this->fileName : $path);
     }

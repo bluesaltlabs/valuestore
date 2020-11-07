@@ -17,7 +17,11 @@ return [
      */
     'keep_empty_files' => env('VALUESTORE_KEEP_EMPTY', false),
 
-    // todo: add the ability to cache values on retrieval?
-    //       The cache would need to be cleared when editing values.
+    /*
+     * Whether or not to place valuestore JSON files in environment-based subdirectories.
+     */
+    'store_by_env' => env('VALUESTORE_STORE_BY_ENV', false),
+
+    // todo: add the ability to save backup(s), x number of versions back?
 
 ];
